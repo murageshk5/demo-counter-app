@@ -4,9 +4,9 @@ pipeline {
     
     parameters {
 
-        choice(name:'action', choices:'create\ndestroy\ndestroyekscluster', description:'create/update or destroy the esk cluster')
-        string(name:'cluster', defaultValue:'eks-test', description:'eks cluster name')
-        string(name:'region', defaultValue:'us-east-2', description:'eks cluster region')
+        choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster', description: 'create/update or destroy the esk cluster')
+        string(name: 'cluster', defaultValue: 'eks-test', description: 'eks cluster name')
+        string(name: 'region', defaultValue: 'us-east-2', description: 'eks cluster region')
     }
     environment {
         AWS_ACCESS_KEY = credentials('aws_access_key_id')
@@ -29,7 +29,6 @@ pipeline {
                     aws configure set asw_secret_key "$AWS_SECRET_KEY"
                     aws configure region ""
                     aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
-                    
                    """;              
             }
         }
