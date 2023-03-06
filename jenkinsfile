@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-/*         stage ("EKS deployment") {
+        stage ("EKS deployment") {
             steps{
             when {  expression { params.action == 'create' } }
             }
@@ -49,8 +49,15 @@ pipeline {
                 CurrentBuild.result= 'UNSTABLE'
             }
 
+            if(apply){
+                sh """
+                    kubectl apply -f .
+                """
+
             }
-        } */
+
+            }
+        }
     }
 
 }
