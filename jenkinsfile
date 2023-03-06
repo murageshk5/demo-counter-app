@@ -2,13 +2,14 @@ pipeline {
     
     agent any
     
-    parameters{
-        choice(name: 'action' , choices: 'create\ndestroy\neksclusterdestroy' , description: 'create/update or destory the eks cluster')
-        string(name: 'cluster', dafaultValue: 'eks-test', description: 'EKS cluster name')
-        string(name: 'region', dafaultValue: 'us-east-2', description: 'EKS cluster region')
+    parameters {
+
+        choice (name: 'action', choices: 'create\ndestroy\neksclusterdestroy', description: 'create/update or destory the eks cluster')
+        string (name: 'cluster', dafaultValue: 'eks-test', description: 'EKS cluster name')
+        string (name: 'region', dafaultValue: 'us-east-2', description: 'EKS cluster region')
     }
 
-    environment{
+    environment {
         AWS_ACCESS_KEY = credentials('aws_access_key_id')
         AWS_SECRET_KEY = credentials('asw_secret_key')
     }
@@ -32,7 +33,7 @@ pipeline {
             }
         }
 
-/*         stage ("EKS deployment") {
+        stage ("EKS deployment") {
             steps{
             when {  expression { params.action == 'create' } }
             }
@@ -50,7 +51,7 @@ pipeline {
             }
 
             }
-        } */
+        }
     }
 
 }
