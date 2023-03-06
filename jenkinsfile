@@ -20,15 +20,17 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/murageshk5/demo-counter-app.git' 
             }
         }
-        stage ("EKS Connect") {
+        stage ("EKS Connect"){
+            
             steps{
 
                 sh """
                     aws configure set aws_access_key_id "$AWS_ACCESS_KEY"
                     aws configure set asw_secret_key "$AWS_SECRET_KEY"
                     aws configure region ""
-                    aws eks --region { params.region } update-kubeconfig --name ${params.cluster}
-                """               
+                    aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+                    
+                   """;              
             }
         }
 
