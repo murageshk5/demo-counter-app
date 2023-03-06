@@ -1,16 +1,58 @@
 pipeline {
+
     agent any
+    
+    parameters{
+
+        choice(name: 'action', choices: 'create'\n'destroy'\n'destroyekscluster' descrption: 'create/upadte or destroy the eks ckuster')
+        string(name: 'cluster', dafaultValue: 'eks-test', descrption: 'EKS cluster name')
+        string(name: 'region', dafaultValue: 'us-east-2', descrption: 'EKS cluster region')
+    }
+
+    environment{
+        AWS_ACCESS_KEY = credentials('aws_access_key_id')
+        AWS_SECRET_KEY = credentials('asw_secret_key')
+    }
+
 
     stages {
         stage("Git checkout") {
             steps{
                 git branch: 'main', url: 'https://github.com/murageshk5/demo-counter-app.git' 
             }
-
-
         }
+        stage ("EKS Connect") {
+            steps{
 
+                sh """
+                    aws configure set aws_access_key_id "$AWS_ACCESS_KEY"
+                    aws configure set asw_secret_key "$AWS_SECRET_KEY"
+                    aws configure region ""
+                    aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+                """               
+            }
+        }
+/* 
+        stage ("EKS deployment") {
+            steps{
+            when {  expression { params.action == 'create' } }
+            }
+
+            script {
+                def apply=false
+            try {
+                input message: "Please confirm the pply to initiate the deployments", ok:"Ready to apply the config"
+                apply= true
+            }
+
+            catch(err) {
+                apply = false
+                CurrentBuild.result= 'UNSTABLE'
+            }
+
+            }
+        }
     }
 
-
 }
+ */
