@@ -4,9 +4,9 @@ pipeline {
     
     parameters{
 
-        choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' descrption: 'create/upadte or destroy the eks ckuster')
-        string(name: 'cluster', dafaultValue: 'eks-test', descrption: 'EKS cluster name')
-        string(name: 'region', dafaultValue: 'us-east-2', descrption: 'EKS cluster region')
+        choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' description: 'create/upadte or destroy the eks ckuster')
+        string(name: 'cluster', dafaultValue: 'eks-test', description: 'EKS cluster name')
+        string(name: 'region', dafaultValue: 'us-east-2', description: 'EKS cluster region')
     }
 
     environment{
