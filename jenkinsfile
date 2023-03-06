@@ -34,10 +34,10 @@ pipeline {
 
         stage ("EKS deployment") {
             steps{
-            when { expression ${params.action == 'create' } }
+            when { expression ${params.action == 'create'} }
             }
 
-            script {
+            script{
                 def apply=false
             try {
                 input message: "Please confirm the pply to initiate the deployments", ok:"Ready to apply the config"
