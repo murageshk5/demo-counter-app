@@ -33,8 +33,8 @@ pipeline {
         }
 
         stage ("EKS deployment") {
-            when { expression {params.action == 'create'}}
-            steps{
+            when { expression { params.action == 'create' }}
+            steps {
             }
 
             script{
@@ -55,7 +55,6 @@ pipeline {
                     kubectl apply -f .
                 """
             }
-
             }
         }
     }
