@@ -1,10 +1,10 @@
 pipeline {
-
+    
     agent any
     
     parameters{
 
-        choice(name: 'action', choices: 'create'\n'destroy'\n'destroyekscluster' descrption: 'create/upadte or destroy the eks ckuster')
+        choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' descrption: 'create/upadte or destroy the eks ckuster')
         string(name: 'cluster', dafaultValue: 'eks-test', descrption: 'EKS cluster name')
         string(name: 'region', dafaultValue: 'us-east-2', descrption: 'EKS cluster region')
     }
@@ -32,8 +32,8 @@ pipeline {
                 """               
             }
         }
-/* 
-        stage ("EKS deployment") {
+
+/*         stage ("EKS deployment") {
             steps{
             when {  expression { params.action == 'create' } }
             }
@@ -51,8 +51,7 @@ pipeline {
             }
 
             }
-        }
+        } */
     }
 
 }
- */
