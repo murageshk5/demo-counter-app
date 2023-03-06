@@ -32,31 +32,31 @@ pipeline {
             }
         }
 
-        stage ("EKS deployment") {
-            when { expression { params.action == 'create' }}
-            steps {
-            }
+        // stage ("EKS deployment") {
+        //     when { expression { params.action == 'create' }}
+        //     steps {
+        //     }
 
-            script{
-                def apply = false
-            try {
-                input message: "Please confirm the pply to initiate the deployments", ok:"Ready to apply the config"
-                apply = true
-            }
+        //     script{
+        //         def apply = false
+        //     try {
+        //         input message: "Please confirm the pply to initiate the deployments", ok:"Ready to apply the config"
+        //         apply = true
+        //     }
 
-            catch(err) {
-                apply = false
-                CurrentBuild.result= 'UNSTABLE'
-            }
+        //     catch(err) {
+        //         apply = false
+        //         CurrentBuild.result= 'UNSTABLE'
+        //     }
 
-            if(apply){
+        //     if(apply){
 
-                sh """
-                    kubectl apply -f .
-                """
-            }
-            }
-        }
+        //         sh """
+        //             kubectl apply -f .
+        //         """
+        //     }
+        //     }
+        // }
     }
 
 }
